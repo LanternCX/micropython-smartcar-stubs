@@ -14,19 +14,32 @@
 
 ## 快速开始
 
-### 1. 环境准备
+1. **获取代码**
+   
+   使用 Git 克隆本仓库：
 
-确保你已经安装了以下软件：
-- [Visual Studio Code](https://code.visualstudio.com/)
-- [Pylance](https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance) 插件（通常随 Python 插件自动安装）
+   ```bash
+   git clone https://github.com/LanternCX/micropython-smartcar-stubs.git
+   ```
 
-### 2. 配置 VS Code
+2. **环境准备**
+   
+   - 安装 [Visual Studio Code](https://code.visualstudio.com/)。
+   - 在 VS Code 中安装 [Python 插件](https://marketplace.visualstudio.com/items?itemName=ms-python.python)（插件会自动安装 Pylance 语言服务器）。
 
-为了让编辑器识别这些桩文件并提供代码提示，你需要配置项目的 `pyrightconfig.json` 或 `settings.json`。
+3. **开始开发**
+   
+   - 使用 VS Code 打开克隆下来的文件夹。
+   - 本项目自带 `pyrightconfig.json` 配置文件，**开箱即用**。
+   - 打开 `seekfree_demo` 下的任意文件（如 `E01_gpio_demo.py`），尝试悬停查看 `machine` 等模块提示，即刻享受代码补全。
 
-#### 方法 A：使用 `pyrightconfig.json` (推荐)
+## 配置详解
 
-本项目根目录下已经包含了一个配置好的 `pyrightconfig.json` 文件。如果你是在当前目录下直接开发，开箱即用。
+如果你想在**自己的新项目**中使用这套 Stubs，或者需要自定义配置，请参考以下说明。
+
+为了让编辑器识别这些桩文件，你需要配置项目的 `pyrightconfig.json` 或 `settings.json`。
+
+### 方法 A：使用 `pyrightconfig.json` (推荐)
 
 如果你在新的项目中开发，请将本项目中的 `stubs` 文件夹复制到你的项目根目录，并创建一个 `pyrightconfig.json` 文件，内容如下：
 
@@ -41,7 +54,7 @@
 }
 ```
 
-#### 方法 B：修改 VS Code 设置
+### 方法 B：修改 VS Code 设置
 
 你也可以在 VS Code 的 `.vscode/settings.json` 中添加以下配置：
 
@@ -54,24 +67,42 @@
 }
 ```
 
-### 3. 验证配置
-
-1. 打开 `seekfree_demo` 文件夹下的任意 `.py` 文件（例如 `E01_gpio_demo.py`）。
-2. 尝试输入 `import machine` 或 `from smartcar import`。
-3. 如果配置正确，你应该能看到相关的智能提示和文档说明。
-4. 将鼠标悬停在函数名上（如 `machine.Pin`），可以看到详细的参数说明。
-
 ## 目录结构说明
 
-- **`stubs/`**: 核心桩文件目录，包含所有 `.pyi` 定义文件。
-- **`seekfree_demo/`**: 官方提供的功能例程，涵盖 GPIO、ADC、PWM、电机控制、PID 等常用功能。
-- **`boot/`**: 启动文件模板。
-    - `0-本文件夹下的两个py文件直接保存到设备根目录.txt`: 说明文件。
-    - `boot.py`: 固件启动脚本。
-    - `user_main.py`: 用户主程序入口。
-- **`pyrightconfig.json`**: Pyright/Pylance 配置文件。
+```text
+.
+├── boot/                # 启动文件模板
+│   ├── boot.py          # 固件启动脚本
+│   └── user_main.py     # 用户主程序入口
+├── seekfree_demo/       # 官方功能例程
+├── stubs/               # 核心代码提示桩文件 (.pyi)
+│   ├── display/         # 屏幕显示接口
+│   ├── machine/         # MicroPython 标准硬件接口
+│   ├── seekfree/        # 逐飞库
+│   ├── smartcar/        # smartcar(nxp) 库
+│   ├── os/              # 系统辅助库
+│   └── time/            # 时间辅助库
+├── pyrightconfig.json   # Pylance 配置文件
+└── README.md            # 项目说明文档
+```
 
-## 开发建议
+## 注意事项
 
-- 建议将你的业务代码写在 `user_main.py` 中，或者新建文件并在 `user_main.py` 中导入，保持 `boot.py` 简洁。
-- 参考 `seekfree_demo` 中的例程来学习如何使用各个硬件接口。
+- **E28_wireless_uart_demo 和 E30_wifi_spi_demo**:
+  
+  为了确保数据类型正确，`data_wave` 列表的初始化已从整型修改为浮点型：
+  ```python
+  data_wave = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+  ```
+
+## 开源协议
+
+本项目采用 **GPL 3.0** 开源协议。
+
+这意味着如果你在本项目的基础上进行开发，依据协议要求，你需要**开源你的代码**。
+
+当然，你可以在比赛结束之后开源你的代码。
+
+## 支持
+
+如果本项目对你有帮助，欢迎在 GitHub 上给个 Star ⭐️ 。
