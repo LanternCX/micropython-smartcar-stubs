@@ -4,6 +4,8 @@
 
 通过使用这些 Stubs，你可以在 VS Code 等编辑器中获得完整的代码补全、类型检查和参数说明，极大地提升开发效率。
 
+结合我的项目 [mpy-cli](https://github.com/LanternCX/mpy-cli) 可以时间几乎无 Thonny 开发。
+
 ## 包含的模块
 
 - `machine`: 标准 MicroPython 硬件控制接口
