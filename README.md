@@ -4,6 +4,8 @@
 
 通过使用这些 Stubs，你可以在 VS Code 等编辑器中获得完整的代码补全、类型检查和参数说明，极大地提升开发效率。
 
+现已适配 v2.1.0 和 v3.1.0 版本固件，详细版本可以查看 [Release](https://github.com/LanternCX/micropython-smartcar-stubs/releases)
+
 结合我的项目 [mpy-cli](https://github.com/LanternCX/mpy-cli) 可以实现几乎无 Thonny 开发。
 
 ## 包含的模块
